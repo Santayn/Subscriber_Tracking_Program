@@ -1,0 +1,26 @@
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\bin\Debug\Курсовая ТРПО.exe.config
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\bin\Debug\Курсовая ТРПО.exe
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\bin\Debug\Курсовая ТРПО.pdb
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.csproj.AssemblyReference.cache
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Form1.resources
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Properties.Resources.resources
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.csproj.GenerateResource.cache
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.csproj.CoreCompileInputs.cache
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.exe
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.pdb
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Many.resources
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.МенюВзаимодействия.resources
+C:\Users\tilik\OneDrive\Рабочий стол\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Help.resources
+D:\Курсовая ТРПО\Курсовая ТРПО\bin\Debug\Курсовая ТРПО.exe.config
+D:\Курсовая ТРПО\Курсовая ТРПО\bin\Debug\Курсовая ТРПО.exe
+D:\Курсовая ТРПО\Курсовая ТРПО\bin\Debug\Курсовая ТРПО.pdb
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.csproj.AssemblyReference.cache
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Form1.resources
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Help.resources
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Many.resources
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.Properties.Resources.resources
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая_ТРПО.МенюВзаимодействия.resources
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.csproj.GenerateResource.cache
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.csproj.CoreCompileInputs.cache
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.exe
+D:\Курсовая ТРПО\Курсовая ТРПО\obj\Debug\Курсовая ТРПО.pdb
