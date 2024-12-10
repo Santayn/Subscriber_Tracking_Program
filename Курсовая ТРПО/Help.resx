@@ -121,7 +121,7 @@
   <data name="SendEmail.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAADbtJREFUeF7tnU+oJUcVxufd92fmxfmTGSOBMExG4sigQtCACUHQRRYaUBR0oYIL
+        DQAACw0B7QfALAAADbtJREFUeF7tnU+oJUcVxufd92fmxfmTGSOBMExG4sigQtCACUHQRRYaUBR0oYIL
         V5KAgWDUxI0k4EbBuBFEstSACC4U/2ySjdGtWQkBXYmZIGIgGCQmxvPV+7qnurv61Knqevd131sffAN9
         z/191XXOJNPv3tv3nXrggY8diPfFp3IEjjxyGtc8o8CRP5k8tRgROPK2xSICR77mZQgceXueWlQEjuH2
         xRSBI1/zMgSOfJE8VQhleJHFwJGveRkCR75IniqEMrzIYuDI17wMgSNfJE8VQhleZDFw5GtehsCRL5Kn
@@ -186,7 +186,7 @@
   <data name="BackButton.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAPOSURBVGhD1dlb
+        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAPOSURBVGhD1dlb
         yE1pHMfxF4McciqMQ6JEmqaIQubehZsh4UoZpxBG4zjjMCNlJslIMyY5JCM0KIcSRVMjNS6mKIfRGDQm
         5sL5bJy+v4tVP0/P3nvtvdd6935/9bnZ67D/z3qf/az/Wm9DhZmHRziB5vqgKWU53pqBaDJZCS9ePkaT
         yDcIi28yA1iDWPFS9wNYi1jhiboewHeIFe3qdgDrECs4NAqdy9AeuWc9YsXuw8Xgs0r9g5P4FqPRGlWn

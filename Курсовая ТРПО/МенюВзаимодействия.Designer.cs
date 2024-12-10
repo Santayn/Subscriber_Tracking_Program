@@ -55,7 +55,7 @@
             this.Chat.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Chat.AutoSize = true;
             this.Chat.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Chat.Location = new System.Drawing.Point(378, 35);
+            this.Chat.Location = new System.Drawing.Point(377, 35);
             this.Chat.Name = "Chat";
             this.Chat.Size = new System.Drawing.Size(162, 41);
             this.Chat.TabIndex = 2;
@@ -171,7 +171,7 @@
             this.SendEmail.FlatAppearance.BorderSize = 0;
             this.SendEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SendEmail.ForeColor = System.Drawing.Color.Transparent;
-            this.SendEmail.Location = new System.Drawing.Point(842, 532);
+            this.SendEmail.Location = new System.Drawing.Point(839, 532);
             this.SendEmail.Name = "SendEmail";
             this.SendEmail.Size = new System.Drawing.Size(49, 51);
             this.SendEmail.TabIndex = 19;
@@ -187,7 +187,7 @@
             this.BackButton.FlatAppearance.BorderSize = 0;
             this.BackButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackButton.ForeColor = System.Drawing.Color.Transparent;
-            this.BackButton.Location = new System.Drawing.Point(842, 38);
+            this.BackButton.Location = new System.Drawing.Point(839, 38);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(37, 38);
             this.BackButton.TabIndex = 20;
@@ -200,7 +200,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.619952F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.38005F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel1.Controls.Add(this.SendEmail, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.Chat, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 1, 2);
@@ -224,7 +224,7 @@
             this.richTextBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox2.Location = new System.Drawing.Point(83, 532);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(753, 51);
+            this.richTextBox2.Size = new System.Drawing.Size(750, 51);
             this.richTextBox2.TabIndex = 22;
             this.richTextBox2.Text = "";
             // 
@@ -233,7 +233,7 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(83, 82);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(753, 444);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(750, 444);
             this.flowLayoutPanel2.TabIndex = 23;
             // 
             // МенюВзаимодействия
@@ -256,7 +256,6 @@
             this.Name = "МенюВзаимодействия";
             this.Text = "МенюВзаимодействия";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.МенюВзаимодействия_FormClosed);
-            this.Load += new System.EventHandler(this.МенюВзаимодействия_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);

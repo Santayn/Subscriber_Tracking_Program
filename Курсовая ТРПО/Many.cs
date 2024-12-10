@@ -13,22 +13,17 @@ namespace Курсовая_ТРПО
 {
     public partial class Many : Form
     {
-        public static string MyyConnection = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=18.mdb";
         private string User;
         private int Role;
-        private OleDbConnection MyConnection;
         public int Role2;
         public int I=0;
         public Many(string login)
         {
             InitializeComponent();
             this.User = login;
-            MyConnection = new OleDbConnection(MyyConnection);
-            MyConnection.Open();
             button1.Visible = false;
             Role = ReturnRole();
             Role2 = 3;
-           // UpdateUserNames();
         }
         private void Many_Load(object sender, EventArgs e)
         {
@@ -38,7 +33,8 @@ namespace Курсовая_ТРПО
         {
             try
             {
-                OleDbDataReader reader = Loading(Role2);
+                SQL sQL = new SQL();
+                OleDbDataReader reader = sQL.Loading(Role2, User);
                 if (reader == null)
                 {
                     MessageBox.Show("Ошибка: загрузка данных вернула null", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -65,17 +61,13 @@ namespace Курсовая_ТРПО
                 MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void UpdateUserNames(string filters = "")    //tyta
+        private void UpdateUserNames(string filters = "")
         {
+            SQL sQL = new SQL();
             if (Role2 < 3)
-            {
-                string query = "SELECT Логин FROM Blamer ";
-                if (!string.IsNullOrWhiteSpace(filters))
-                    query += $" WHERE Логин LIKE '%{filters}%'";
-                OleDbCommand command = new OleDbCommand(query, MyConnection);
+            {               
                 flowLayoutPanel1.Controls.Clear();
-                using (OleDbDataReader reader = command.ExecuteReader())
+                using (OleDbDataReader reader = sQL.updateUserNames(Role2, filters).ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -96,10 +88,7 @@ namespace Курсовая_ТРПО
             }
             else
             {
-                string query = $"SELECT ФИО FROM Абонент WHERE Пользователь = '{User}'";
-                if (!string.IsNullOrWhiteSpace(filters))
-                    query += $" And ФИО LIKE '%{filters}%'";
-                OleDbCommand command = new OleDbCommand(query, MyConnection);
+                OleDbCommand command = sQL.updateUserNames(User, filters);
                 flowLayoutPanel1.Controls.Clear();
                 using (OleDbDataReader reader = command.ExecuteReader())
                 {
@@ -122,15 +111,13 @@ namespace Курсовая_ТРПО
 
             }
         }
-
         private void AddAbonent_Click(object sender, EventArgs e)
-        {
-            DateTime now = DateTime.Now;
-            string Name = textBox1.Text;
-            string query = $"INSERT INTO Абонент (Пользователь, ФИО, ДатаРегистрации) VALUES ('{User}','{Name}','{now}')";
+        {            
             try
             {
-                OleDbCommand command = new OleDbCommand(query, MyConnection);
+                string Name = textBox1.Text;
+                SQL sQL = new SQL();
+                OleDbCommand command = sQL.AddAbonent(User, Name);
                 command.ExecuteNonQuery();
                 MessageBox.Show("Регистрация успешна", "Уведомление", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -148,15 +135,14 @@ namespace Курсовая_ТРПО
             string Name = textBox1.Text;
             if (Name != "")
             {
+                SQL sQL = new SQL();
                 if (Role2 == 3)
                 {
-                    string query = $"SELECT Код FROM Абонент WHERE Пользователь = '{User}' AND ФИО = '{Name}'";
-                    Next_Form(Name, query);
+                    Next_Form(Name, sQL.workWith(Role,Name,User));
                 }
                 else
                 {
-                    string query = $"SELECT Код FROM Blamer WHERE Логин = '{Name}'";
-                    Next_Form(Name, query);
+                    Next_Form(Name, sQL.workWith(Role, Name, User));
                 }
             }
             else
@@ -166,10 +152,8 @@ namespace Курсовая_ТРПО
         }
         private void Next_Form(string Name, string query)
         {
-            OleDbCommand command = new OleDbCommand(query, MyConnection);
-
-            // Выполняем запрос и проверяем результат
-            object result = command.ExecuteScalar();
+            SQL sQL = new SQL();
+            object result = sQL.Next_Form(query);
             if (result == null)
             {
                 MessageBox.Show("Результат запроса не найден. Убедитесь, что данные введены корректно.",
@@ -181,21 +165,19 @@ namespace Курсовая_ТРПО
 
             // Преобразуем результат в число
             int ID = Convert.ToInt32(result);
-
+            string FIO = textBox1.Text;
             // Переходим к следующей форме
-            МенюВзаимодействия form3 = new МенюВзаимодействия(User, ID, Role2, Name);
+            МенюВзаимодействия form3 = new МенюВзаимодействия(User, ID, Role2, Name, FIO);
             FormController.Instance.PushAndHide(form3);
         }
-
         private void Many_FormClosed(object sender, FormClosedEventArgs e)
         {
             FormController.Instance.Pop();
         }
         public int ReturnRole()
         {
-            string query = $"SELECT Роль FROM Blamer WHERE Логин = '{User}'";
-            OleDbCommand command = new OleDbCommand(query, MyConnection);
-            int Role = Convert.ToInt32(command.ExecuteScalar());
+            SQL sQL = new SQL();
+            int Role = Convert.ToInt32(sQL.ReturnRole(User).ExecuteScalar());
             if (Role < 3)
                 button1.Visible = true;
             return Role;
@@ -217,41 +199,17 @@ namespace Курсовая_ТРПО
             flowLayoutPanel1.Controls.Clear();
             LoadUserNames(Role2);
         }
-        public OleDbDataReader Loading(int role) 
-        {
-            OleDbCommand command = null;
-            switch (role)
-            { 
-                case 1:
-                    string query = $"SELECT Логин FROM Blamer WHERE Роль <> '{role}'";
-                    command = new OleDbCommand(query, MyConnection);
-                    return command.ExecuteReader();
-                case 2:
-                    string query2 = $"SELECT Логин FROM Blamer WHERE Роль <> '{role}'";
-                    command = new OleDbCommand(query2, MyConnection);
-                    return command.ExecuteReader();
-                case 3:
-                    string query3 = $"SELECT ФИО FROM Абонент WHERE Пользователь = '{User}'";
-                    command = new OleDbCommand(query3, MyConnection);
-                    return command.ExecuteReader();
-                default:
-                    return null;
-            }
-        }
-
         private void поддержкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Help help = new Help(User, Role2) ;
             FormController.Instance.PushAndHide(help);
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             timer1.Stop();
             
             timer1.Start();
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             string TEX = textBox1.Text;

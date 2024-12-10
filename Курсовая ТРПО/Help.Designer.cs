@@ -181,7 +181,6 @@
             this.Name = "Help";
             this.Text = "Form2";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Help_FormClosed);
-            this.Load += new System.EventHandler(this.Help_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

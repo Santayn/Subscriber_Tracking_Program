@@ -17,22 +17,14 @@ namespace Курсовая_ТРПО
 {
     public partial class Form1 : Form
     {
-        public static string connectString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=18.mdb";
-        private OleDbConnection myConnection;
         public int Count = 0;
         public Form1()
         {
             InitializeComponent();
             FormController.Instance.PushAndHide(this);
-            myConnection = new OleDbConnection(connectString);
-            myConnection.Open();  
             textBox3.Visible = false;
             label4.Visible = false;
         }     
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
         public string Read()
         {
             Hashing hashing = new Hashing();
@@ -44,31 +36,16 @@ namespace Курсовая_ТРПО
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            myConnection.Close();
+            SQL sql = new SQL();
+            sql.close();
         }
-        public int FindUser(string login, string password)
+        public int? FindUser(string login, string password)
         {
             try
             {
-                // Передача строки подключения в OleDbConnection
-                using (OleDbConnection connection = new OleDbConnection(connectString))
-                {
-                    connection.Open();
-
-                    // SQL-запрос для поиска пользователя
-                    string query = "SELECT COUNT(*) FROM Blamer WHERE Логин = ? AND Пароль = ?";
-
-                    using (OleDbCommand command = new OleDbCommand(query, connection))
-                    {
-                        // Параметры запроса добавляются в порядке их использования
-                        command.Parameters.AddWithValue("?", login);
-                        command.Parameters.AddWithValue("?", password);
-                        // Выполнение запроса
-                        int userCount = Convert.ToInt32(command.ExecuteScalar());
-                        // Если пользователь найден, возвращаем true
-                        return userCount;
-                    }
-                }
+                SQL sql = new SQL();
+                sql.findUser(login, password);
+                return 1;
             }
             catch (Exception ex)
             {
@@ -77,7 +54,7 @@ namespace Курсовая_ТРПО
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                return 0;
+                return null;
             }
         }
         private void Open_Click(object sender, EventArgs e)
@@ -121,14 +98,10 @@ namespace Курсовая_ТРПО
                     string password = Read();
                     string login = textBox1.Text;
                     string phone = textBox3.Text;
-                    if (FindUser(login, Read() ) == 0)
+                    if (FindUser(login, Read()) == 1)
                     {
-                        string query = $"INSERT INTO Blamer (Логин, Пароль, Телефон) VALUES ('{login}', '{password}', '{phone}')";
-                        OleDbCommand command = new OleDbCommand(query, myConnection);
-                        command.ExecuteNonQuery();
-                        MessageBox.Show($"Регистрация успешна: ",
-                            "Уведомление",
-                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        SQL sql = new SQL();
+                        sql.Registration(login, password, phone);
                     }
                     else
                     {
@@ -154,11 +127,6 @@ namespace Курсовая_ТРПО
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
             }
-        }
-
-        private void Form1_Load_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

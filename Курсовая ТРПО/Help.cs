@@ -35,34 +35,16 @@ namespace Курсовая_ТРПО
             BackButton.Visible = false;
             SendEmail.Visible = false;
         }
-
-        private void Help_Load(object sender, EventArgs e)
-        {
-        }
         private void LoadNamesTopics()
         {
             try
             {
+                SQL sQL = new SQL();
+                Chatic chatic = new Chatic();
                 flowLayoutPanel2.Controls.Clear();
-                using (OleDbDataReader reader = LoadNamesTopicsBlamerNotBlamer()) 
+                using (OleDbDataReader reader = sQL.LoadNamesTopicsBlamerNotBlamer(Role, User)) 
                 {
-                    while (reader.Read())
-                    {
-                        string name = reader.GetString(0); // Получаем значение столбца "ФИО"
-
-                        // Создаем метку для отображения имени
-                        Label nameLabel = new Label
-                        {
-                            Text = name,
-                            AutoSize = true,
-                            Margin = new Padding(5),
-                            Font = new Font("Arial", 14, FontStyle.Regular)
-                        };
-                        // Добавляем метку в контейнер (например, FlowLayoutPanel)
-                        nameLabel.BackColor = Color.LightBlue; // Добавить фон для выделения сообщений пользователя
-                        flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
-                        flowLayoutPanel2.Controls.Add(nameLabel);
-                    }
+                    chatic.loadNamesTopics(reader, flowLayoutPanel2);
                 }
             }
             catch (Exception ex)
@@ -74,51 +56,13 @@ namespace Курсовая_ТРПО
         {
             try
             {
+                SQL sQL = new SQL();
+                Chatic chatic = new Chatic();
                 string Tem = textBox4.Text;
                 flowLayoutPanel2.Visible = true;
-                string query = $"SELECT Текст, Отправитель FROM Обращение_В_Поддержку WHERE ((Отправитель = '{Sender}' And Получатель ='{Reciver}') OR (Отправитель = '{Reciver}' And Получатель ='{Sender}')) AND Тема ='{Tem}' ORDER BY ВремяОтправки";
-
-                OleDbCommand command = new OleDbCommand(query, MyConnection);
-
-                using (OleDbDataReader reader = command.ExecuteReader())
+                using (OleDbDataReader reader = sQL.PrintMessegeThisTopic(Sender, Reciver, Tem).ExecuteReader())
                 {
-                    while (reader.Read())
-                    {
-                        string messageText = reader.GetString(0);
-                        string messageSender = reader.GetString(1);
-
-                        // Создаем метку для текста сообщения
-                        Label messageLabel = new Label
-                        {
-                            Text = messageText,
-                            AutoSize = true,
-                            Margin = new Padding(5),
-                            Font = new Font("Arial", 12, FontStyle.Regular),
-                            Width = flowLayoutPanel2.Width
-                    };
-
-                        // Если сообщение отправлено пользователем (Sender), выравниваем его вправо
-                        if (messageSender == Sender)
-                        {
-                            messageLabel.Width = flowLayoutPanel2.Width;
-                            messageLabel.TextAlign = ContentAlignment.MiddleRight;
-                            messageLabel.Dock = DockStyle.Right;
-                            messageLabel.BackColor = Color.LightBlue; // Добавить фон для выделения сообщений пользователя
-                            flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
-                            flowLayoutPanel2.Controls.Add(messageLabel);
-                        }
-                        else
-                        {
-                            // Если сообщение отправлено получателем (Reciver), выравниваем его влево
-                            messageLabel.Width = flowLayoutPanel2.Width;
-                            messageLabel.TextAlign = ContentAlignment.MiddleLeft;
-                            messageLabel.Dock = DockStyle.Left;
-                            messageLabel.BackColor = Color.LightGray; // Добавить фон для сообщений получателя
-                            flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
-                            flowLayoutPanel2.Controls.Add(messageLabel);
-
-                        }
-                    }
+                    chatic.printMessegeThisTopic(reader, Sender, flowLayoutPanel2);
                 }
             }
             catch (Exception ex)
@@ -130,25 +74,10 @@ namespace Курсовая_ТРПО
         {
             try
             {
+                SQL sQL = new SQL();
                 string Temka = textBox4.Text;
                 var (senderPhone, recipientPhone) = (Sen, Reci);
-                // Insert chat message
-                string insertChatQuery = "INSERT INTO Обращение_В_Поддержку (Текст, Отправитель, Получатель, Тема) VALUES (@Text, @Sender, @Recipient, @Temka)";
-                OleDbCommand insertCommand = new OleDbCommand(insertChatQuery, MyConnection);
-                insertCommand.Parameters.AddWithValue("@Text", richTextBox1.Text);
-                insertCommand.Parameters.AddWithValue("@Sender", senderPhone);
-                insertCommand.Parameters.AddWithValue("@Recipient", recipientPhone);
-                insertCommand.Parameters.AddWithValue("@Temka", Temka);
-                int rowsAffected = insertCommand.ExecuteNonQuery();
-                if (rowsAffected > 0)
-                {
-                    MessageBox.Show("Message sent successfully.");
-                }
-                else
-                {
-                    MessageBox.Show("Message could not be sent.");
-                }
-
+                int rowsAffected = sQL.sentMessegeHelp(richTextBox1.Text, senderPhone, recipientPhone, Temka).ExecuteNonQuery();
                 flowLayoutPanel2.Controls.Clear();
                 PrintMessegeThisTopic(senderPhone, recipientPhone);
             }
@@ -160,10 +89,9 @@ namespace Курсовая_ТРПО
         }
         private OleDbCommand FindTema()
         {
+            SQL sql = new SQL();
             string Tem = textBox4.Text;
-            string qwert = $"Select Отправитель From Обращение_В_Поддержку WHERE Тема = '{Tem}'";
-            OleDbCommand command = new OleDbCommand(qwert, MyConnection);
-            return command;
+            return sql.FindTema(Tem);
         }
         private void Help_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -220,27 +148,6 @@ namespace Курсовая_ТРПО
             LoadNamesTopics();
             SendEmail.Visible = true;
 
-        }
-        private OleDbDataReader LoadNamesTopicsBlamerNotBlamer()
-        {
-            OleDbCommand command = null;
-            switch (Role)
-            {
-                case 1:
-                    string query = $"SELECT Тема FROM Обращение_В_Поддержку Group by Тема";
-                    command = new OleDbCommand(query, MyConnection);
-                    return command.ExecuteReader();
-                case 2:
-                    string query2 = $"SELECT Тема FROM Обращение_В_Поддержку Group by Тема";
-                    command = new OleDbCommand(query2, MyConnection);
-                    return command.ExecuteReader();
-                case 3:
-                    string query3 = $"SELECT Тема FROM Обращение_В_Поддержку WHERE Отправитель = '{User}' Group by Тема";
-                    command = new OleDbCommand(query3, MyConnection);
-                    return command.ExecuteReader();
-                default:
-                    return null;
-            }
         }
         private void BackButton_Click(object sender, EventArgs e)
         {
